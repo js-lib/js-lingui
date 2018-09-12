@@ -152,28 +152,6 @@ export default (config: LinguiConfig): CatalogApi => {
           return locales.isValid(locale) && locale
         })
         .filter(Boolean)
-    },
-
-    addLocale(locale) {
-      if (!locales.isValid(locale) && locale !== config.pseudoLocale) {
-        return [false, null]
-      }
-
-      const filename = path.join(
-        config.localeDir,
-        this.formatFilename(sourceFilename, locale)
-      )
-
-      if (!fs.existsSync(filename)) {
-        const dirname = path.dirname(filename)
-
-        mkdirp.sync(dirname)
-        this.write(locale, {})
-
-        return [true, filename]
-      }
-
-      return [false, filename]
     }
   }
 }
